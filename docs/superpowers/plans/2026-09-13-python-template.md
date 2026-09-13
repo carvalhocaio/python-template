@@ -338,9 +338,7 @@ def rename_project(raw_name: str) -> None:
     smoke_test = root_dir / "tests" / "test_smoke.py"
     if smoke_test.exists():
         content = smoke_test.read_text(encoding="utf-8")
-        content = content.replace(
-            f"import {old_module_name}", f"import {module_name}"
-        )
+        content = content.replace(f"import {old_module_name}", f"import {module_name}")
         content = content.replace(
             f"{old_module_name}.__version__", f"{module_name}.__version__"
         )
@@ -350,7 +348,9 @@ def rename_project(raw_name: str) -> None:
     # Sync uv
     print("Re-syncing virtual environment...")
     subprocess.run(["uv", "sync"], cwd=root_dir, check=True)
-    print(f"\nProject successfully renamed to '{dist_name}' (package: '{module_name}')!")
+    print(
+        f"\nProject successfully renamed to '{dist_name}' (package: '{module_name}')!"
+    )
 
 
 if __name__ == "__main__":
