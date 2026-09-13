@@ -37,8 +37,8 @@ ci: lint format-check audit test ## Runs full verification pipeline locally
 check: ci ## Alias for ci
 
 clean: ## Cleans build artifacts and caches
-	rm -rf .ruff_cache .pytest_cache dist build *.egg-info
-	find . -type d -name '__pycache__' -exec rm -rf {} +
+	rm -rf .ruff_cache .pytest_cache dist build *.egg-info .coverage htmlcov
+	find . -type d -name '__pycache__' -not -path './.venv*' -exec rm -rf {} +
 
 rename: ## Renames the project package: make rename NAME=my_new_project
 	@if [ -z "$(NAME)" ]; then \

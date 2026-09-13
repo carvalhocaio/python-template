@@ -6,9 +6,12 @@ on:
   pull_request:
     branches: [main, master]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' }}
 
 jobs:
   check:
@@ -28,7 +31,7 @@ jobs:
         run: uv python install 3.12
 
       - name: Install dependencies
-        run: uv sync
+        run: uv sync --frozen
 
       - name: Check code linting
         run: uv run ruff check .

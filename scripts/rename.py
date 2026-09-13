@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Utility script to rename the project and source package."""
 
+import keyword
 import re
 import shutil
 import subprocess
@@ -13,7 +14,10 @@ def to_valid_identifier(name: str) -> str:
     cleaned = re.sub(r"_+", "_", cleaned).strip("_")
     if not cleaned or cleaned[0].isdigit():
         cleaned = f"pkg_{cleaned}"
-    return cleaned.lower()
+    cleaned = cleaned.lower()
+    if keyword.iskeyword(cleaned):
+        cleaned = f"pkg_{cleaned}"
+    return cleaned
 
 
 def rename_project(raw_name: str) -> None:
@@ -34,9 +38,10 @@ def rename_project(raw_name: str) -> None:
     module_name = to_valid_identifier(dist_name)
 
     src_dir = root_dir / "src"
-    current_pkgs = [
-        p for p in src_dir.iterdir() if p.is_dir() and (p / "__init__.py").exists()
-    ]
+    current_pkgs = sorted(
+        [p for p in src_dir.iterdir() if p.is_dir() and (p / "__init__.py").exists()],
+        key=lambda p: p.name,
+    )
     if not current_pkgs:
         print("Error: Could not find current package in src/", file=sys.stderr)
         sys.exit(1)
