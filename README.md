@@ -12,7 +12,7 @@ A minimalist, modern Python project template preconfigured with:
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ### 1. Using this template
 
@@ -40,7 +40,7 @@ make hooks
 
 ---
 
-## 🛠️ Available Commands
+## Available Commands
 
 | Command | Description |
 |---|---|
@@ -60,7 +60,7 @@ make hooks
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 .
