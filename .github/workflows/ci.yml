@@ -39,6 +39,9 @@ jobs:
       - name: Check code formatting
         run: uv run ruff format --check .
 
+      - name: Check static typing
+        run: uv run pyright
+
       - name: Audit dependencies
         run: uv run pip-audit
 

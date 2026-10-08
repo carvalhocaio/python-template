@@ -4,6 +4,7 @@ A minimalist, modern Python project template preconfigured with:
 - **Python 3.12+** and packaging via PEP 621 (`pyproject.toml` + `hatchling`)
 - **[uv](https://github.com/astral-sh/uv)** for fast package and virtual environment management
 - **[Ruff](https://github.com/astral-sh/ruff)** for linting and formatting (PEP 8 compliant, 88 columns)
+- **[Pyright](https://github.com/microsoft/pyright)** for static type checking
 - **[Pre-commit](https://pre-commit.com/)** git hooks for code hygiene and security
 - **[Pytest](https://pytest.org/)** test runner with smoke test
 - **[pip-audit](https://github.com/pypa/pip-audit)** for dependency vulnerability scanning
@@ -53,8 +54,9 @@ make hooks
 | `make lint-fix` | Automatically fix linting issues |
 | `make format` | Format code with `ruff` |
 | `make format-check` | Check code formatting without modifying |
+| `make typecheck` | Run static type checking with `pyright` |
 | `make audit` | Audit dependencies for vulnerabilities with `pip-audit` |
-| `make ci` | Run full verification pipeline locally (`lint`, `format-check`, `audit`, `test`) |
+| `make ci` | Run full verification pipeline locally (`lint`, `format-check`, `typecheck`, `audit`, `test`) |
 | `make clean` | Remove caches and build artifacts |
 | `make rename NAME=...` | Rename package and update configuration |
 
